@@ -100,6 +100,7 @@ def game_loop():
     for block in snake_body[:-1]:
       if block == snake_head:
         game_over = True
+        game_close = True
 
     draw_snake(block_size, snake_body)
     display_score(snake_length - 1)
