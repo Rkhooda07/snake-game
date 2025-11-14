@@ -26,3 +26,9 @@ snake_speed = 15
 
 # Snake and food size
 block_size = 10
+
+# Draw the snake
+def draw_snake(block_size, snake_body):
+  for i, block in enumerate(snake_body):
+    color = red if i == len(snake_body) - 1 else black
+    pygame.draw.rect(screen, color, [block[0], block[1], block_size, block_size])
