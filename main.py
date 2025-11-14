@@ -73,3 +73,42 @@ def game_loop():
         elif event.key == pygame.K_RIGHT:
           x_change = block_size
           y_change = 0
+
+    # Check if the snake hits the wall
+    if x >= width or x < 0 or y >= height or y < 0:
+      game_close = True
+      game_over = True
+
+    # Update snake's head position
+    x += x_change
+    y += y_change
+    screen.fill(blue)
+
+    # Draw food
+    pygame.draw.rect(screen, green, [food_x, food_y, block_size, block_size])
+
+    # Update the snake's body
+    snake_head = []
+    snake_head.append(x)
+    snake_head.append(y)
+    snake_body.append(snake_head)
+
+    if len(snake_body) > snake_length:
+      del snake_body[0]
+      
+    # Check if the snake runs into itself
+    for block in snake_body[:-1]:
+      if block == snake_head:
+        game_over = True
+
+    draw_snake(block_size, snake_body)
+    display_score(snake_length - 1)
+    pygame.display.update()
+
+    # Check if the snake eats food
+    if x == food_x and y == food_y:
+      food_x = round(random.randrange(0, width - block_size) / 10.0) * 10.0
+      food_y = round(random.randrange(0, height - block_size) / 10.0) * 10.0
+      snake_length += 1
+
+    clock.tick(snake_speed)
