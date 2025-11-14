@@ -131,3 +131,6 @@ def game_loop():
           elif event.key == pygame.K_c:
             game_loop()
             return
+          
+if __name__ == "__main__":
+  game_loop()
