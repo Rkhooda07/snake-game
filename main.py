@@ -50,3 +50,26 @@ def game_loop():
   # Random food position
   food_x = round(random.randrange(0, width - block_size) / 10.0) * 10.0
   food_y = round(random.randrange(0, height - block_size) / 10.0) * 10.0
+
+  # Main game loop
+  game_over = False
+  game_close = False
+
+  while not game_over:
+    # Movement keys
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        game_over  = True
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_UP:
+          x_change = 0
+          y_change = -block_size
+        elif event.key == pygame.K_DOWN:
+          x_change = 0
+          y_change = block_size
+        elif event.key == pygame.K_LEFT:
+          x_change = -block_size
+          y_change = 0
+        elif event.key == pygame.K_RIGHT:
+          x_change = block_size
+          y_change = 0
