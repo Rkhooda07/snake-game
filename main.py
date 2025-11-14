@@ -95,7 +95,7 @@ def game_loop():
 
     if len(snake_body) > snake_length:
       del snake_body[0]
-      
+
     # Check if the snake runs into itself
     for block in snake_body[:-1]:
       if block == snake_head:
@@ -112,3 +112,22 @@ def game_loop():
       snake_length += 1
 
     clock.tick(snake_speed)
+
+    while game_close:
+      screen.fill(black)
+      font = pygame.font.SysFont("comicsanms", 35)
+      game_over_text = font.render("Game over! Press Q to Quit or C to Continue", True, red)
+      screen.blit(game_over_text, [width // 15, height // 2.4])
+      pygame.display.update()
+
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit()
+          quit()
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_q:
+            pygame.quit()
+            quit()
+          elif event.key == pygame.K_c:
+            game_loop()
+            return
