@@ -38,3 +38,15 @@ def display_score(score):
   font = pygame.font.SysFont("comicsanms", 50)
   score_text = font.render(f"Score : {score}", True, red)
   screen.blit(score_text, [0, 0])
+
+def game_loop():
+  x, y = width // 2, height // 2
+  x_change, y_change = 0, 0
+
+  # Initial snake body
+  snake_body = []
+  snake_length = 1
+
+  # Random food position
+  food_x = round(random.randrange(0, width - block_size) / 10.0) * 10.0
+  food_y = round(random.randrange(0, height - block_size) / 10.0) * 10.0
