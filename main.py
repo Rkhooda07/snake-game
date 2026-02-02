@@ -1,4 +1,5 @@
 import pygame
+import asyncio
 import time
 import random
 
@@ -39,7 +40,7 @@ def display_score(score):
   score_text = font.render(f"Score : {score}", True, red)
   screen.blit(score_text, [0, 0])
 
-def game_loop():
+async def game_loop():
   x, y = width // 2, height // 2
   x_change, y_change = 0, 0
 
@@ -113,6 +114,7 @@ def game_loop():
       snake_length += 1
 
     clock.tick(snake_speed)
+    await asyncio.sleep(0)
 
     while game_close:
       screen.fill(black)
@@ -120,6 +122,7 @@ def game_loop():
       game_over_text = font.render("Game over! Press Q to Quit or C to Continue", True, red)
       screen.blit(game_over_text, [width // 15, height // 2.4])
       pygame.display.update()
+      await asyncio.sleep(0)
 
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -134,4 +137,4 @@ def game_loop():
             return
           
 if __name__ == "__main__":
-  game_loop()
+  asyncio.run(game_loop())
